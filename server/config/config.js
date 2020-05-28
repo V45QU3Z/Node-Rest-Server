@@ -9,7 +9,7 @@ let urlDB;
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/restaurante';
 } else {
-    urlDB = 'mongodb+srv://vasquez:vasquez@restaurante-r8ni4.mongodb.net/test?retryWrites=true';
+    urlDB = process.env.MONGO_URL;
 }
 
 //usar el urlDB.... crear cual enviroments
