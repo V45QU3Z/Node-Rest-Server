@@ -22,3 +22,7 @@ if (process.env.NODE_ENV === 'dev') {
 
 //usar el urlDB.... crear cual enviroments
 process.env.URLDB = urlDB;
+
+
+//GOOGLE CLIENT_ID
+process.env.CLIENT_ID = process.env.CLIENT_ID || '972133091454-6mun421hg1ci3lq3o6fc7auatrtj91up.apps.googleusercontent.com';
