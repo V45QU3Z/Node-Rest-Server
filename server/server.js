@@ -5,11 +5,12 @@ const bodyParser = require('body-parser');
 const app = express()
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-    // parse application/json
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
 app.use(bodyParser.json())
 
-app.use(require('./routes/user.controller'));
+//config de routes
+app.use(require('./routes/index'));
 
 //conection db
 mongoose.set('useCreateIndex', true); //es opcional... agregue debido a un error de deprecation.....

@@ -4,9 +4,16 @@ const _ = require('underscore');
 
 const app = express()
 const User = require('../models/user.model');
+const { verificarToken, verificarRole } = require('../middlewares/autentication');
 
 
-app.get('/user', function(req, res) {
+app.get('/user', [verificarToken, verificarRole], (req, res) => {
+
+    /*return res.json({
+        user: req.user,
+        name: req.user.name,
+        email: req.user.email
+    });*/
 
     let desde = req.query.desde || 0 //mandar parametro... ejm ?desde=10
     desde = Number(desde);
@@ -29,7 +36,8 @@ app.get('/user', function(req, res) {
 
 })
 
-app.post('/user', (req, res) => {
+app.post('/user', [verificarToken, verificarRole], (req, res) => {
+
     let body = req.body;
 
     let user = new User({
@@ -50,7 +58,7 @@ app.post('/user', (req, res) => {
     });
 })
 
-app.put('/user/:id', (req, res) => {
+app.put('/user/:id', [verificarToken, verificarRole], (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['name', 'email', 'img', 'role', 'status']); //_.PICK solo los campos a actualizar
 
@@ -65,7 +73,7 @@ app.put('/user/:id', (req, res) => {
     })
 })
 
-app.delete('/user/:id', (req, res) => {
+app.delete('/user/:id', [verificarToken, verificarRole], (req, res) => {
     let id = req.params.id;
 
     User.findByIdAndRemove(id, (err, userRemoved) => {
